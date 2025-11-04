@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 Dynamic IP Dashboard</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    height: 100vh; margin: 0; background: #f0f0f0;
+  }
+  .container {
+    background: #fff; padding: 2rem; border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  a {
+    display: inline-block; margin-top: 1rem;
+    padding: 0.5rem 1rem; background: #007bff;
+    color: #fff; text-decoration: none; border-radius: 5px;
+  }
+  a:hover { background: #0056b3; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ESP32 Connection Info</h1>
+  <div id="info">Loading...</div>
+  <a id="connect-link" href="#" target="_blank">Connect</a>
+</div>
+
+<script>
+const SUPABASE_URL = "https://ktzgfynmsnmmdvzgbjli.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0emdmeW5tc25tbWR2emdiamxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MDczNDIsImV4cCI6MjA3NzM4MzM0Mn0.4ElVmLBwxuvoo98pxtuWbNjIxJIm9KUVc7hIAXRCPv0"; // public anon key
+const TABLE_NAME = "esp32_connections";
+
+async function fetchLatestIP() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=ssid,ip&order=timestamp.desc&limit=1`, {
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    const data = await res.json();
+    if (data.length > 0) {
+      const { ssid, ip } = data[0];
+      document.getElementById('info').innerText = `Connected to Wi-Fi: ${ssid}\nIP: ${ip}`;
+      document.getElementById('connect-link').href = `http://${ip}`;
+      document.getElementById('connect-link').innerText = `Go to ${ip}`;
+    } else {
+      document.getElementById('info').innerText = "No ESP32 connected yet.";
+    }
+  } catch(err) {
+    console.error(err);
+    document.getElementById('info').innerText = "Error fetching data.";
+  }
+}
+
+// fetch on load
+fetchLatestIP();
+// refresh every 10 seconds
+setInterval(fetchLatestIP, 10000);
+</script>
+</body>
+</html>
