@@ -64,16 +64,37 @@
     height: 1px;
     background: #ddd;
   }
+  p {
+    margin-bottom: 1rem;
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>📘 ESP32 Dynamic IP Dashboard — Documentation</h1>
 
+  <h2>📖 Project Description</h2>
+  <p>
+    The <b>ESP32 Dynamic IP Dashboard</b> is a web-based interface designed to make it easy for users to 
+    locate and connect to their ESP32’s hosted web dashboard — even if the IP address changes dynamically.
+  </p>
+  <p>
+    When your ESP32 connects to Wi-Fi, it automatically sends its <b>current IP address</b> and <b>Wi-Fi SSID</b> 
+    to a <b>Supabase cloud database</b>. The <b>Netlify-hosted dashboard</b> (this website) retrieves that information 
+    in real time and provides a clickable link so you can directly access your ESP32 dashboard.
+  </p>
+  <p>
+    This system is part of the larger <b>ESP32 Automated Thermometer Alarm v4.1</b> project — a temperature 
+    monitoring system that uses the <b>MAX6675 thermocouple sensor</b>, WebSocket communication, and cloud integration 
+    to provide real-time monitoring and control via your browser.
+  </p>
+
+  <hr>
+
   <h2>🔹 What This Site Does</h2>
   <p>
-    This dashboard retrieves your ESP32’s latest Wi-Fi connection and IP address from Supabase. 
-    It allows you to click a direct link to access your ESP32’s hosted web dashboard.
+    This dashboard fetches the latest <b>Wi-Fi SSID</b> and <b>IP address</b> of your ESP32 from Supabase.
+    It displays the current connection and provides a direct “Go to IP” button for quick access.
   </p>
 
   <h2>🔹 How to Use</h2>
@@ -93,17 +114,17 @@
 
   <h2>🔹 Extra Features</h2>
   <ul>
-    <li>The site refreshes every 10 seconds for updated IP info.</li>
-    <li>Securely fetches IP data using Supabase REST API.</li>
-    <li>Responsive and mobile-friendly interface.</li>
+    <li>Automatic IP refresh every 10 seconds.</li>
+    <li>Uses Supabase REST API for secure and reliable updates.</li>
+    <li>Fully responsive and mobile-friendly layout.</li>
   </ul>
 
   <hr>
 
   <h2>📟 ESP32 Pinout Reference</h2>
   <p>
-    Below is a helpful pinout diagram to guide your sensor, LED, and button connections.
-    Ensure that your wiring matches your firmware configuration.
+    Below is the official ESP32 pinout diagram to help you identify the correct pins for sensors, LEDs, 
+    and reset buttons used in this project.
   </p>
 
   <img src="ESP32-Pinout.png" alt="ESP32 Pinout Diagram">
