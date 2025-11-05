@@ -14,7 +14,7 @@
     line-height: 1.6;
   }
   .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: auto;
     background: #fff;
     padding: 2rem;
@@ -33,11 +33,12 @@
   }
   .back {
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: 2rem;
     background: #6c757d;
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 5px;
+    text-decoration: none;
   }
   .back:hover {
     background: #5a6268;
@@ -47,6 +48,22 @@
     padding: 0.2rem 0.4rem;
     border-radius: 5px;
   }
+  img {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  ul, ol {
+    padding-left: 1.2rem;
+  }
+  hr {
+    margin: 2rem 0;
+    border: none;
+    height: 1px;
+    background: #ddd;
+  }
 </style>
 </head>
 <body>
@@ -54,14 +71,16 @@
   <h1>📘 ESP32 Dynamic IP Dashboard — Documentation</h1>
 
   <h2>🔹 What This Site Does</h2>
-  <p>This dashboard retrieves your ESP32’s latest Wi-Fi connection and IP address from Supabase. 
-  It allows you to click a direct link to access your ESP32’s hosted web dashboard.</p>
+  <p>
+    This dashboard retrieves your ESP32’s latest Wi-Fi connection and IP address from Supabase. 
+    It allows you to click a direct link to access your ESP32’s hosted web dashboard.
+  </p>
 
   <h2>🔹 How to Use</h2>
   <ol>
     <li>Power on your ESP32 and let it connect to Wi-Fi.</li>
     <li>The ESP32 automatically sends its IP and SSID to Supabase.</li>
-    <li>Open <a href="https://esp32-connect.netlify.app" target="_blank" rel="noopener">esp32-connect.netlify.app</a>.</li>
+    <li>Open <a href="https://esp32-connect.netlify.app" target="_blank" rel="noopener noreferrer">esp32-connect.netlify.app</a>.</li>
     <li>Click the “Go to &lt;IP&gt;” button to open your ESP32 dashboard.</li>
   </ol>
 
@@ -77,6 +96,27 @@
     <li>The site refreshes every 10 seconds for updated IP info.</li>
     <li>Securely fetches IP data using Supabase REST API.</li>
     <li>Responsive and mobile-friendly interface.</li>
+  </ul>
+
+  <hr>
+
+  <h2>📟 ESP32 Pinout Reference</h2>
+  <p>
+    Below is a helpful pinout diagram to guide your sensor, LED, and button connections.
+    Ensure that your wiring matches your firmware configuration.
+  </p>
+
+  <img src="ESP32-Pinout.png" alt="ESP32 Pinout Diagram">
+
+  <ul>
+    <li><b>GPIO 19</b> — MAX6675 SO (Serial Out)</li>
+    <li><b>GPIO 5</b> — MAX6675 CS (Chip Select)</li>
+    <li><b>GPIO 18</b> — MAX6675 SCK (Serial Clock)</li>
+    <li><b>GPIO 13</b> — Green LED (Wi-Fi Connected)</li>
+    <li><b>GPIO 27</b> — Blue LED (Reading Indicator)</li>
+    <li><b>GPIO 23</b> — Red LED (Temperature Alert)</li>
+    <li><b>GPIO 33</b> — Yellow LED (Recording Indicator)</li>
+    <li><b>GPIO 4</b> — Wi-Fi Reset Button (hold 3 seconds)</li>
   </ul>
 
   <a href="index.html" class="back">⬅ Back to Dashboard</a>
